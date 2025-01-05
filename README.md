@@ -1,63 +1,133 @@
+```markdown
 # Flight Price API Backend
 
-Backend service for flight price search with authentication.
+Node.js-based backend for handling flight price search and user authentication.
 
 ## Tech Stack
-- Node.js
-- Express
-- JWT Authentication
+- **Node.js**: Backend runtime.
+- **Express**: Web framework.
+- **JWT**: For user authentication.
+- **CORS**: To handle cross-origin requests.
+
+## Features
+- Flight search by source, destination, and date.
+- User authentication (Login/Register).
+- Mock flight data for quick testing.
+
+## Prerequisites
+- Node.js (v16+ recommended)
+- npm (v8+ recommended)
 
 ## Setup
-```bash
-# Install dependencies
-npm install
 
-# Configure environment variables
-Create .env file with:
-PORT=5000
-JWT_SECRET=your-secret-key
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/RuntimeTerror6969/Flight-Price-API-Backend.git
+   ```
 
-# Start server
-npm start
-```
+2. Navigate to the project directory:
+   ```bash
+   cd Flight-Price-API-Backend
+   ```
 
-## Environment Variables
-```
-PORT=5000
-JWT_SECRET=your-secret-key
-```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Configure environment variables:
+   - Create a `.env` file in the root directory:
+     ```bash
+     JWT_SECRET=your-secret-key
+     PORT=5000
+     ```
+
+5. Start the server:
+   ```bash
+   npm start
+   ```
+
+6. Test the API:
+   - Open Postman or a browser and access:
+     ```
+     http://localhost:5000/api
+     ```
+
+---
 
 ## API Endpoints
 
-### Authentication
-- POST `/api/auth/register`: Register new user
-  - Body: `{ email: string, password: string }`
-- POST `/api/auth/login`: Login user
-  - Body: `{ email: string, password: string }`
+### **Authentication**
+- **POST** `/api/auth/login`  
+  Authenticate a user with email and password.
 
-### Flights
-- POST `/api/flights`: Search flights
-  - Body: `{ source: string, destination: string, date: string, passengers: number, route: string }`
-- GET `/api/prices`: Get flight prices
-  - Query: `?source=string&destination=string&date=string`
+- **POST** `/api/auth/register`  
+  Register a new user.
+
+### **Flight Search**
+- **POST** `/api/flights`  
+  Search flights based on source, destination, and date.
+
+---
+
+## Deployment (Vercel)
+
+### Deploying the Backend
+1. Push your repository to GitHub.
+2. Go to the [Vercel dashboard](https://vercel.com/).
+3. Click **Add New Project** and import your repository.
+4. Configure the environment variables in the Vercel dashboard:
+   - `JWT_SECRET`: Secret key for JWT authentication.
+   - `PORT`: Optional (Vercel assigns a default port).
+5. Deploy the backend. Vercel will provide a live URL.
+
+---
 
 ## Project Structure
-```
+
+```plaintext
 backend/
 ├── src/
-│   ├── index.js
-│   ├── routes/
-│   │   ├── flightRoutes.js
-│   │   └── authRoutes.js
-│   ├── controllers/
+│   ├── index.js             # Entry point
+│   ├── routes/              # API routes
+│   │   ├── authRoutes.js
+│   │   └── flightRoutes.js
+│   ├── controllers/         # Request handlers
+│   │   ├── authController.js
 │   │   └── flightController.js
-│   ├── services/
+│   ├── services/            # Business logic
 │   │   └── flightService.js
-│   └── data/
+│   └── data/                # Mock data
 │       └── mockFlights.js
-└── package.json
+└── package.json             # Project dependencies and scripts
 ```
 
+---
 
-2. Configure environment variables in Vercel dashboard
-3. Deploy using Vercel CLI or GitHub integration
+## Environment Variables
+
+Create a `.env` file in the root directory with the following:
+
+```
+JWT_SECRET=your-secret-key
+PORT=5000
+```
+
+---
+
+## Available Scripts
+
+### Start Development Server
+```bash
+npm start
+```
+
+---
+
+## Additional Notes
+
+- Test the backend endpoints using Postman or curl.
+- For frontend setup, visit the [Frontend Repository](https://github.com/RuntimeTerror6969/Flight-Price-API-Frontend).
+```
+
+Let me know if you'd like further adjustments!
