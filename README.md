@@ -11,3 +11,7 @@ Node.js/Express backend for flight price search with authentication.
 npm install
 cp .env.example .env  # Configure environment variables
 npm start
+```
+## Environment Variables
+PORT=5000
+JWT_SECRET=your-secret-key
