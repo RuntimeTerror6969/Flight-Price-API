@@ -13,7 +13,9 @@ Backend service for flight price search with authentication.
 npm install
 
 # Configure environment variables
-cp .env.example .env
+Create .env file with:
+PORT=5000
+JWT_SECRET=your-secret-key
 
 # Start server
 npm start
