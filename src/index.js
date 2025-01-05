@@ -6,7 +6,10 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 app.use(
   cors({
-    origin: ["https://your-frontend-url.vercel.app", "http://localhost:3000"],
+    origin: [
+      "https://flight-price-api-frontend.vercel.app/",
+      "http://localhost:3000",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
