@@ -56,25 +56,6 @@ backend/
 └── package.json
 ```
 
-## Deployment (Vercel)
-1. Add vercel.json to root:
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "src/index.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "src/index.js",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-    }
-  ]
-}
-```
+
 2. Configure environment variables in Vercel dashboard
 3. Deploy using Vercel CLI or GitHub integration
