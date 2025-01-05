@@ -1,4 +1,5 @@
 const flightService = require("../services/flightService");
+// logic to get flight data
 exports.searchFlights = async (req, res) => {
   try {
     const { source, destination, date, passengers = 1, route } = req.body;

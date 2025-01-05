@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const flightRoutes = require("./routes/flightRoutes");
 const authRoutes = require("./routes/authRoutes");
-
 const app = express();
+// Middleware to handle cors issues
 app.use(
   cors({
     origin: "https://flight-price-api-frontend.vercel.app",
@@ -13,7 +13,7 @@ app.use(
   })
 );
 app.use(express.json());
-
+// endpoints for the api
 app.use("/api", flightRoutes);
 app.use("/api/auth", authRoutes);
 
