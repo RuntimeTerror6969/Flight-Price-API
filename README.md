@@ -1,18 +1,17 @@
-```markdown
 # Flight Price API Backend
 
 Node.js-based backend for handling flight price search and user authentication.
 
 ## Tech Stack
-- **Node.js**: Backend runtime.
-- **Express**: Web framework.
-- **JWT**: For user authentication.
-- **CORS**: To handle cross-origin requests.
+- **Node.js**: Backend runtime
+- **Express**: Web framework
+- **JWT**: For user authentication
+- **CORS**: To handle cross-origin requests
 
 ## Features
-- Flight search by source, destination, and date.
-- User authentication (Login/Register).
-- Mock flight data for quick testing.
+- Flight search by source, destination, and date
+- User authentication (Login/Register)
+- Mock flight data for quick testing
 
 ## Prerequisites
 - Node.js (v16+ recommended)
@@ -20,34 +19,34 @@ Node.js-based backend for handling flight price search and user authentication.
 
 ## Setup
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/RuntimeTerror6969/Flight-Price-API-Backend.git
    ```
 
-2. Navigate to the project directory:
+2. **Navigate to the project directory:**
    ```bash
    cd Flight-Price-API-Backend
    ```
 
-3. Install dependencies:
+3. **Install dependencies:**
    ```bash
    npm install
    ```
 
-4. Configure environment variables:
+4. **Configure environment variables:**
    - Create a `.env` file in the root directory:
      ```bash
      JWT_SECRET=your-secret-key
      PORT=5000
      ```
 
-5. Start the server:
+5. **Start the server:**
    ```bash
    npm start
    ```
 
-6. Test the API:
+6. **Test the API:**
    - Open Postman or a browser and access:
      ```
      http://localhost:5000/api
@@ -77,8 +76,8 @@ Node.js-based backend for handling flight price search and user authentication.
 2. Go to the [Vercel dashboard](https://vercel.com/).
 3. Click **Add New Project** and import your repository.
 4. Configure the environment variables in the Vercel dashboard:
-   - `JWT_SECRET`: Secret key for JWT authentication.
-   - `PORT`: Optional (Vercel assigns a default port).
+   - `JWT_SECRET`: Secret key for JWT authentication
+   - `PORT`: Optional (Vercel assigns a default port)
 5. Deploy the backend. Vercel will provide a live URL.
 
 ---
@@ -128,6 +127,5 @@ npm start
 
 - Test the backend endpoints using Postman or curl.
 - For frontend setup, visit the [Frontend Repository](https://github.com/RuntimeTerror6969/Flight-Price-API-Frontend).
-```
 
-Let me know if you'd like further adjustments!
+---
