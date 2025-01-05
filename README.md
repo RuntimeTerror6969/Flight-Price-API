@@ -1,5 +1,6 @@
-# Flight Price API - Backend
-Node.js/Express backend for flight price search with authentication.
+# Flight Price API Backend
+
+Backend service for flight price search with authentication.
 
 ## Tech Stack
 - Node.js
@@ -8,10 +9,72 @@ Node.js/Express backend for flight price search with authentication.
 
 ## Setup
 ```bash
+# Install dependencies
 npm install
-cp .env.example .env  # Configure environment variables
+
+# Configure environment variables
+cp .env.example .env
+
+# Start server
 npm start
 ```
+
 ## Environment Variables
+```
 PORT=5000
 JWT_SECRET=your-secret-key
+```
+
+## API Endpoints
+
+### Authentication
+- POST `/api/auth/register`: Register new user
+  - Body: `{ email: string, password: string }`
+- POST `/api/auth/login`: Login user
+  - Body: `{ email: string, password: string }`
+
+### Flights
+- POST `/api/flights`: Search flights
+  - Body: `{ source: string, destination: string, date: string, passengers: number, route: string }`
+- GET `/api/prices`: Get flight prices
+  - Query: `?source=string&destination=string&date=string`
+
+## Project Structure
+```
+backend/
+├── src/
+│   ├── index.js
+│   ├── routes/
+│   │   ├── flightRoutes.js
+│   │   └── authRoutes.js
+│   ├── controllers/
+│   │   └── flightController.js
+│   ├── services/
+│   │   └── flightService.js
+│   └── data/
+│       └── mockFlights.js
+└── package.json
+```
+
+## Deployment (Vercel)
+1. Add vercel.json to root:
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+    }
+  ]
+}
+```
+2. Configure environment variables in Vercel dashboard
+3. Deploy using Vercel CLI or GitHub integration
