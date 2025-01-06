@@ -1,3 +1,4 @@
+// flightService.js
 const mockFlights = require("../data/mockFlights");
 
 exports.searchFlights = async (
@@ -8,13 +9,6 @@ exports.searchFlights = async (
   route = "direct"
 ) => {
   const searchDate = new Date(date).toISOString().split("T")[0];
-  console.log("Search params:", {
-    source,
-    destination,
-    searchDate,
-    passengers,
-    route,
-  });
 
   let filtered = mockFlights.filter(
     (flight) =>
@@ -24,17 +18,20 @@ exports.searchFlights = async (
       flight.dates.includes(searchDate)
   );
 
-  const results = filtered.map((flight) => {
-    const totalPrice = flight.price * passengers;
+  return filtered.map((flight) => ({
+    ...flight,
+    displayPrice: `₹${flight.price.toLocaleString("en-IN")}`,
+    totalPrice: `₹${(flight.price * passengers).toLocaleString("en-IN")}`,
+    passengers,
+  }));
+};
 
-    return {
-      ...flight,
-      displayPrice: `₹${flight.price.toLocaleString("en-IN")}`,
-      totalPrice: `₹${totalPrice.toLocaleString("en-IN")}`,
-      passengers,
-    };
-  });
+exports.getFlightPrices = async (source, destination, date) => {
+  const flights = await this.searchFlights(source, destination, date);
 
-  console.log("Final results:", results);
-  return results;
+  // Group prices by airline
+  return flights.reduce((prices, flight) => {
+    prices[flight.airline.toLowerCase()] = flight.displayPrice;
+    return prices;
+  }, {});
 };
