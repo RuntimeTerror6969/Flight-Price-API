@@ -1,11 +1,11 @@
-// flightController.js
 const flightService = require("../services/flightService");
 
 exports.searchFlights = async (req, res) => {
   try {
-    const { source, destination, date, passengers = 1, route } = req.body;
+    const { source, destination, date, passengers = 1, route } = req.body; // take out values input by the user
 
     if (!source || !destination || !date) {
+      //  ensure no field is empty
       return res.status(400).json({
         error: "Missing required parameters",
       });
