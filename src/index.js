@@ -15,7 +15,9 @@ app.use(
 app.use(express.json());
 app.get("/", (req, res) => {
   // default route to inform that the backend is running
-  res.send("Flight Price API Backend is running.");
+  res.send(
+    "Welcome to the Flight Price API Backend. To see how it works, please use the frontend link provided."
+  );
 });
 
 // endpoints for the api
