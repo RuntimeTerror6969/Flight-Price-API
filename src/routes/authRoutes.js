@@ -1,80 +1,49 @@
-// const express = require("express");
-// const router = express.Router();
-// const jwt = require("jsonwebtoken");
-
-// let users = [{ email: "test@test.com", password: "password" }]; // In-memory storage for users (demo purposes)
-
-// router.post("/register", (req, res) => {
-//   const { email, password } = req.body;
-
-//   // Check if user already exists
-//   const existingUser = users.find((user) => user.email === email);
-//   if (existingUser) {
-//     return res.status(400).json({ message: "User already exists" });
-//   }
-
-//   // Add user to in-memory storage
-//   users.push({ email, password });
-
-//   // Generate token
-//   const token = jwt.sign(
-//     { email },
-//     "8fb36f63862fe5b98e8d9f1cbe155c7692366c3c42e8272c19284d292a2bd008a38a222f84113fcf66bcca579f550c70b9f3cb94cce8bf779c1a0f6381eb24ef",
-//     { expiresIn: "1h" }
-//   );
-//   res.json({ token, email });
-// });
-
-// router.post("/login", (req, res) => {
-//   const { email, password } = req.body;
-
-//   // Validate user credentials
-//   const user = users.find(
-//     (user) => user.email === email && user.password === password
-//   );
-//   if (!user) {
-//     return res.status(401).json({ message: "Invalid credentials" });
-//   }
-
-//   // Generate token
-//   const token = jwt.sign(
-//     { email },
-//     "8fb36f63862fe5b98e8d9f1cbe155c7692366c3c42e8272c19284d292a2bd008a38a222f84113fcf66bcca579f550c70b9f3cb94cce8bf779c1a0f6381eb24ef",
-//     { expiresIn: "1h" }
-//   );
-//   res.json({ token, email });
-// });
-
-// module.exports = router;
-// authRoutes.js
+const express = require("express");
+const router = express.Router();
 const jwt = require("jsonwebtoken");
 
+// Get JWT secret from environment variable
 const JWT_SECRET = process.env.JWT_SECRET;
 
-router.post("/register", (req, res) => {
-  const { email, password } = req.body;
+// In-memory storage for users (demo purposes)
+let users = [{ email: "test@test.com", password: "password" }];
 
-  const existingUser = users.find((user) => user.email === email);
-  if (existingUser) {
-    return res.status(400).json({ message: "User already exists" });
+// Ensure router has proper error handling
+router.post("/register", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const existingUser = users.find((user) => user.email === email);
+
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    users.push({ email, password });
+    const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
+    res.json({ token, email });
+  } catch (error) {
+    console.error("Register error:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  users.push({ email, password });
-
-  const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
-  res.json({ token, email });
 });
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
 
-  const user = users.find(
-    (user) => user.email === email && user.password === password
-  );
-  if (!user) {
-    return res.status(401).json({ message: "Invalid credentials" });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
+    res.json({ token, email });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  const token = jwt.sign({ email }, JWT_SECRET, { expiresIn: "1h" });
-  res.json({ token, email });
 });
+
+module.exports = router;
